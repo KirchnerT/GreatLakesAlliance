@@ -170,9 +170,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002260336272_InitialCreate.cs" />
+    <Compile Include="Migrations\202002260336272_InitialCreate.Designer.cs">
+      <DependentUpon>202002260336272_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002291853325_addfullname.cs" />
+    <Compile Include="Migrations\202002291853325_addfullname.Designer.cs">
+      <DependentUpon>202002291853325_addfullname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002291855062_gender.cs" />
+    <Compile Include="Migrations\202002291855062_gender.Designer.cs">
+      <DependentUpon>202002291855062_gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002291915394_gender1.cs" />
+    <Compile Include="Migrations\202002291915394_gender1.Designer.cs">
+      <DependentUpon>202002291915394_gender1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -190,6 +208,139 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Admin\404.html" />
+    <Content Include="Admin\500.html" />
+    <Content Include="Admin\blank.html" />
+    <Content Include="Admin\buttons.html" />
+    <Content Include="Admin\calender.html" />
+    <Content Include="Admin\chart.html" />
+    <Content Include="Admin\compose.html" />
+    <Content Include="Admin\css\atlas.css" />
+    <Content Include="Admin\css\bars.css" />
+    <Content Include="Admin\css\bootstrap-markdown.min.css" />
+    <Content Include="Admin\css\bootstrap.min.css" />
+    <Content Include="Admin\css\chocolat.css" />
+    <Content Include="Admin\css\clndr.css" />
+    <Content Include="Admin\css\fabochart.css" />
+    <Content Include="Admin\css\font-awesome.css" />
+    <Content Include="Admin\css\icon-font.min.css" />
+    <Content Include="Admin\css\jqvmap.css" />
+    <Content Include="Admin\css\popuo-box.css" />
+    <Content Include="Admin\css\style.css" />
+    <Content Include="Admin\css\vroom.css" />
+    <Content Include="Admin\editor.html" />
+    <Content Include="Admin\fonts\digital-7-webfont.svg" />
+    <Content Include="Admin\fonts\digital-7_italic-webfont.svg" />
+    <Content Include="Admin\fonts\digital-7_mono-webfont.svg" />
+    <Content Include="Admin\fonts\fontawesome-webfont.svg" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Admin\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Admin\forms.html" />
+    <Content Include="Admin\graph.html" />
+    <Content Include="Admin\grids.html" />
+    <Content Include="Admin\images\1.jpg" />
+    <Content Include="Admin\images\1.png" />
+    <Content Include="Admin\images\2.png" />
+    <Content Include="Admin\images\2222.png" />
+    <Content Include="Admin\images\3.png" />
+    <Content Include="Admin\images\4.png" />
+    <Content Include="Admin\images\5.png" />
+    <Content Include="Admin\images\admin.jpg" />
+    <Content Include="Admin\images\admin1.jpg" />
+    <Content Include="Admin\images\admin2.jpg" />
+    <Content Include="Admin\images\alarm.png" />
+    <Content Include="Admin\images\business-1031754_640.jpg" />
+    <Content Include="Admin\images\clockface.png" />
+    <Content Include="Admin\images\closew.gif" />
+    <Content Include="Admin\images\cross.png" />
+    <Content Include="Admin\images\fb.png" />
+    <Content Include="Admin\images\hourhand.png" />
+    <Content Include="Admin\images\icons.png" />
+    <Content Include="Admin\images\in.jpg" />
+    <Content Include="Admin\images\in1.jpg" />
+    <Content Include="Admin\images\in10.jpg" />
+    <Content Include="Admin\images\in11.jpg" />
+    <Content Include="Admin\images\in2.jpg" />
+    <Content Include="Admin\images\in3.jpg" />
+    <Content Include="Admin\images\in4.jpg" />
+    <Content Include="Admin\images\in5.jpg" />
+    <Content Include="Admin\images\in6.jpg" />
+    <Content Include="Admin\images\in7.jpg" />
+    <Content Include="Admin\images\in8.jpg" />
+    <Content Include="Admin\images\in9.jpg" />
+    <Content Include="Admin\images\leftw.gif" />
+    <Content Include="Admin\images\minhand.png" />
+    <Content Include="Admin\images\p1.jpg" />
+    <Content Include="Admin\images\p2.jpg" />
+    <Content Include="Admin\images\p3.jpg" />
+    <Content Include="Admin\images\p4.jpg" />
+    <Content Include="Admin\images\p5.jpg" />
+    <Content Include="Admin\images\p6.jpg" />
+    <Content Include="Admin\images\pic3.jpg" />
+    <Content Include="Admin\images\rightw.gif" />
+    <Content Include="Admin\images\right_arrow.png" />
+    <Content Include="Admin\images\search.png" />
+    <Content Include="Admin\images\search2.png" />
+    <Content Include="Admin\images\sechand.png" />
+    <Content Include="Admin\images\social.png" />
+    <Content Include="Admin\images\speed.png" />
+    <Content Include="Admin\images\tick1.png" />
+    <Content Include="Admin\images\time.png" />
+    <Content Include="Admin\images\timer.png" />
+    <Content Include="Admin\images\tw.png" />
+    <Content Include="Admin\images\watch.png" />
+    <Content Include="Admin\inbox.html" />
+    <Content Include="Admin\index.html" />
+    <Content Include="Admin\js\amcharts.js" />
+    <Content Include="Admin\js\arbor.js" />
+    <Content Include="Admin\js\atlas.js" />
+    <Content Include="Admin\js\barChart.jquery.js" />
+    <Content Include="Admin\js\bootstrap-markdown.js" />
+    <Content Include="Admin\js\bootstrap.min.js" />
+    <Content Include="Admin\js\cbpFWTabs.js" />
+    <Content Include="Admin\js\Chart-pie.js" />
+    <Content Include="Admin\js\Chart.js" />
+    <Content Include="Admin\js\clndr.js" />
+    <Content Include="Admin\js\css3clock.js" />
+    <Content Include="Admin\js\CSSPlugin.min.js" />
+    <Content Include="Admin\js\datamaps-all.js" />
+    <Content Include="Admin\js\dygraph-combined.js" />
+    <Content Include="Admin\js\fabochart.js" />
+    <Content Include="Admin\js\jquery-1.10.2.min.js" />
+    <Content Include="Admin\js\jquery.chocolat.js" />
+    <Content Include="Admin\js\jquery.nicescroll.js" />
+    <Content Include="Admin\js\jquery.vmap.js" />
+    <Content Include="Admin\js\jquery.vmap.sampledata.js" />
+    <Content Include="Admin\js\jquery.vmap.world.js" />
+    <Content Include="Admin\js\light.js" />
+    <Content Include="Admin\js\map.js" />
+    <Content Include="Admin\js\modernizr.custom.04022.js" />
+    <Content Include="Admin\js\moment-2.2.1.js" />
+    <Content Include="Admin\js\protovis-d3.2.js" />
+    <Content Include="Admin\js\radar.js" />
+    <Content Include="Admin\js\responsiveslides.min.js" />
+    <Content Include="Admin\js\scripts.js" />
+    <Content Include="Admin\js\serial.js" />
+    <Content Include="Admin\js\site.js" />
+    <Content Include="Admin\js\skycons.js" />
+    <Content Include="Admin\js\TweenLite.min.js" />
+    <Content Include="Admin\js\underscore-min.js" />
+    <Content Include="Admin\js\vix.js" />
+    <Content Include="Admin\js\vroom.js" />
+    <Content Include="Admin\login.html" />
+    <Content Include="Admin\map.html" />
+    <Content Include="Admin\media.html" />
+    <Content Include="Admin\profile.html" />
+    <Content Include="Admin\project.html" />
+    <Content Include="Admin\register.html" />
+    <Content Include="Admin\ribbon.html" />
+    <Content Include="Admin\sign.html" />
+    <Content Include="Admin\table.html" />
+    <Content Include="Admin\tabs.html" />
+    <Content Include="Admin\typography.html" />
+    <Content Include="Admin\validation.html" />
+    <Content Include="Admin\w3layouts-License.txt" />
+    <Content Include="Admin\widget.html" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -235,6 +386,34 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Admin\fonts\digital-7-webfont.eot" />
+    <Content Include="Admin\fonts\digital-7-webfont.ttf" />
+    <Content Include="Admin\fonts\digital-7-webfont.woff" />
+    <Content Include="Admin\fonts\digital-7_italic-webfont.eot" />
+    <Content Include="Admin\fonts\digital-7_italic-webfont.ttf" />
+    <Content Include="Admin\fonts\digital-7_italic-webfont.woff" />
+    <Content Include="Admin\fonts\digital-7_mono-webfont.eot" />
+    <Content Include="Admin\fonts\digital-7_mono-webfont.ttf" />
+    <Content Include="Admin\fonts\digital-7_mono-webfont.woff" />
+    <Content Include="Admin\fonts\fontawesome-webfont.eot" />
+    <Content Include="Admin\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Admin\fonts\fontawesome-webfont.woff" />
+    <Content Include="Admin\fonts\FontAwesome.otf" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Admin\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="Admin\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="Admin\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="Admin\maps\africa.json" />
+    <Content Include="Admin\maps\america.json" />
+    <Content Include="Admin\maps\asia.json" />
+    <Content Include="Admin\maps\europe.json" />
+    <Content Include="Admin\maps\mideast.json" />
+    <Content Include="Admin\maps\risk.json" />
+    <Content Include="Admin\maps\usofa.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +430,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002260336272_InitialCreate.resx">
+      <DependentUpon>202002260336272_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002291853325_addfullname.resx">
+      <DependentUpon>202002291853325_addfullname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002291855062_gender.resx">
+      <DependentUpon>202002291855062_gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002291915394_gender1.resx">
+      <DependentUpon>202002291915394_gender1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
