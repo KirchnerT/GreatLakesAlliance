@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace GreatLakesAlliance.Controllers
 {
-    public class TestController : Controller
+    public class EventController : Controller
     {
-        // GET: Test
+        // GET: Event
         public ActionResult Index()
         {
             return View();
