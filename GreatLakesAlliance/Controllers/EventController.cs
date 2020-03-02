@@ -30,7 +30,7 @@ namespace GreatLakesAlliance.Controllers
             return View(eventList);
         }
 
-        public ActionResult Edit(string eventName)
+        public ActionResult Edit(string eventName, int volunteersNeeded, DateTime eventStartDateTime)
         {
             var id = Request.QueryString["id"];
 
@@ -40,6 +40,26 @@ namespace GreatLakesAlliance.Controllers
 
         [HttpPost]
         public ActionResult Edit()
+        {
+            var name = Request["eventName"];
+            var vNeeded = Request["volunteersNeeded"];
+            var startDate = Request["eventStartDateTime"];
+
+            //update database here...
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(string eventName, int volunteersNeeded, DateTime eventStartDateTime)
+        {
+            var id = Request.QueryString["id"];
+
+            //retrive data from database
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Details()
         {
             var name = Request["eventName"];
             var vNeeded = Request["volunteersNeeded"];

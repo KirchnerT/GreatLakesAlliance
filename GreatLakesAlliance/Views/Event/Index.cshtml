@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.volunteersNeeded)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { eventName = item.eventName }) |
-                @Html.ActionLink("Details", "Details", new { eventName = item.eventName }) |
-                @Html.ActionLink("Delete", "Delete", new { eventName = item.eventName })
+                @Html.ActionLink("Edit", "Edit", new { eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime }) |
+                @Html.ActionLink("Details", "Details", new { eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime }) |
+                @Html.ActionLink("Delete", "Delete", new {eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime })
             </td>
         </tr>
     }
