@@ -70,6 +70,43 @@ namespace GreatLakesAlliance.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Delete(string eventName, int volunteersNeeded, DateTime eventStartDateTime)
+        {
+            var id = Request.QueryString["id"];
+
+            //retrive data from database
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete()
+        {
+            var name = Request["eventName"];
+            var vNeeded = Request["volunteersNeeded"];
+            var startDate = Request["eventStartDateTime"];
+
+            //update database here...
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(string eventName, int volunteersNeeded, DateTime eventStartDateTime)
+        {
+            var name = Request["eventName"];
+            var vNeeded = Request["volunteersNeeded"];
+            var startDate = Request["eventStartDateTime"];
+
+            //update database here...
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

@@ -23,7 +23,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.eventName)
             </td>
@@ -33,7 +33,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime }) |
                 @Html.ActionLink("Details", "Details", new { eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime }) |
-                @Html.ActionLink("Delete", "Delete", new {eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime })
+                @Html.ActionLink("Delete", "Delete", new { eventName = item.eventName, volunteersNeeded = item.volunteersNeeded, eventStartDateTime = item.eventStartDateTime })
             </td>
         </tr>
     }
