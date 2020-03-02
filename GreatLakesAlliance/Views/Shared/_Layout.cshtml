@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("GLA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -34,7 +34,23 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="text-body" style="background-color: white; border-top-left-radius: 6px; border-top-right-radius: 6px; padding-bottom: 15px; padding-top: 15px">
+                <div class="col-md-3" ">
+                    <p style="color: dimgray; font-size: larger; text-align: center; font-weight: bold">Donation</p>
+                </div>
+
+                <div class="col-md-3">
+                    <p style="color: dimgray; font-size: larger; text-align: center; font-weight: bold">Volunteer</p>
+                </div>
+
+                <div class="col-md-3">
+                    <p style="color: dimgray; font-size: larger; text-align: center; font-weight: bold">Events</p>
+                </div>
+                <div class="col-md-3">
+                    <p style="color: dimgray; font-size: larger; text-align: center; font-weight: bold">Contact</p>
+                </div>
+                <p style="text-align: center; font-size: 14px">&copy; @DateTime.Now.Year - GreatLakesCleanUp</p>
+            </div>
         </footer>
     </div>
 

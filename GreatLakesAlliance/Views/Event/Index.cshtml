@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<GreatLakesAlliance.Models.EventDataModel>
 @{
     ViewBag.Title = "Event";
 }
@@ -6,3 +6,36 @@
 <h2>Event</h2>
 
 <p>Random Test text for event page</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.eventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.volunteersNeeded)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.eventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.volunteersNeeded)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { eventName = item.eventName }) |
+                @Html.ActionLink("Details", "Details", new { eventName = item.eventName }) |
+                @Html.ActionLink("Delete", "Delete", new { eventName = item.eventName })
+            </td>
+        </tr>
+    }
+
+</table>
