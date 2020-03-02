@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DonorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -200,6 +201,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DonorDataModel.cs" />
     <Compile Include="Models\EventDataModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -531,6 +533,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Donor\Index.cshtml" />
+    <Content Include="Views\Donor\Create.cshtml" />
+    <Content Include="Views\Donor\PrevDonations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
