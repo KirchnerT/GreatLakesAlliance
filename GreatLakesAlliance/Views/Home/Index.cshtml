@@ -15,28 +15,41 @@
 <div class="jumbotron">
     <h1>GLA</h1>
     <p class="lead">Great Lakes Alliance is a non-profit organization that wants to help clean up the lakes so that it can be enjoyed for years to come by the people and fish alike.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    @using (Html.BeginForm("About", "Home"))
+    {
+        <input class="btn btn-primary btn-lg" type="submit" value="Learn More" />
+    }
 </div>
 
-<div class="row" style="margin-top: 50px">
+<div id="container" class="jumbotron" style="margin-top: 100px">
+    <h1>Volunteer Today!</h1>
+    <p>
+        Come make a difference with over 100 million people! We have events going on every week with other fun activities.
+    </p>
+    @using (Html.BeginForm("Index", "Event"))
+    {
+        <input class="btn btn-primary btn-lg" type="submit" value="Event"/>
+    }
+</div>
 
+<p align="center" style="margin-top: 100px">
+    <img src="~/Content/GLAVOLUNTEER.jpg"  style="height: 10%; width: 49%"/>
+    <img src="~/Content/GLAVOLUNTEER2.jpg" style="height: 11%; width: 49%"/>
+</p>    
 
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Join Us Today!!!!
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
+<div class="jumbotron" style="margin-top: 100px">
+    <h1>Too Far Away To Help?</h1>
+    <p>
+        There is always a way to help. You can either donate to an event of your choosing or to us directly. With a donation of just
+        $5 dollars a month you will receive a Great Lakes Alliance braided braclet and t-shirt!
+    </p>
+    @using (Html.BeginForm("Index", "Donor"))
+    {
+        <input class="btn btn-primary btn-lg" type="submit" value="Donate" />
+    }
+</div>
 
-    <div class="col-md-4">
-        <h2>Blah Blah De Blah De Blah</h2>
-        <p>Cailyn sucks</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>WHALE WASH</h2>
-        <p>GET YOUR WHALES WASHED.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="jumbotron" style="margin-top: 100px; margin-bottom: 100px">
+    <h1>Our Mission</h1>
+    <p>Our mission is to......</p>
 </div>
