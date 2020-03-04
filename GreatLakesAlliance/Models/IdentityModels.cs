@@ -35,5 +35,7 @@ namespace GreatLakesAlliance.Models
         {
             return new ApplicationDbContext();
         }
+
+        object placeHolderVariable;
     }
 }
