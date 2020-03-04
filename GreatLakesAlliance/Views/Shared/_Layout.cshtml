@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,7 +28,13 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Event", "Index", "Event")</li>
-                    <li>@Html.ActionLink("Donate", "Index", "Donor")</li>
+                    <li>@Html.ActionLink("Donate", "Index", "Donation")</li>
+                    @{ if (User.IsInRole("Admin"))
+                        {
+                        <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                            }
+                        }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

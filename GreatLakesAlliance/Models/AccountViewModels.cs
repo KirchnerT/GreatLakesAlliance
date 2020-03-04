@@ -68,12 +68,16 @@ namespace GreatLakesAlliance.Models
 
     public class RegisterViewModel
     {
+        public string Name { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
         [Display(Name = "User name"), Required]
         public string UserName { get; set; }
+
         [Display(Name = "Full Name"), Required]
         public string FullName { get; set; }
 
