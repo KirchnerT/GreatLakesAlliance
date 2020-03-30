@@ -76,8 +76,6 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // POST: Event/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
@@ -127,10 +125,30 @@ namespace GreatLakesAlliance.Controllers
             base.Dispose(disposing);
         }
 
-        //Delete Later
-        public ActionResult NotRealVolunteer()
+        //Volunte
+        public ActionResult NotRealVolunteer(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EventDataModel eventDataModel = db.EventDataModels.Find(id);
+            eventDataModel.volunteersNeeded--;
+            return View(eventDataModel);
+        }
+
+        // POST: Event/NotRealVolunteer/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NotRealVolunteer([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(eventDataModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(eventDataModel);
         }
     }
 }
