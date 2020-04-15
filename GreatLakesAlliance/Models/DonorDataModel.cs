@@ -19,6 +19,7 @@ namespace GreatLakesAlliance.Models
         public string ccv { get; set; }
         public int amount { get; set; }
         public string orgEvent { get; set; }
+        public int eventId { get; set; }
 
     }
 }

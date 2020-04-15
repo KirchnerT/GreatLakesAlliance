@@ -22,9 +22,9 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // GET: Donation/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -37,20 +37,33 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // GET: Donation/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(int eventId)
         {
+            if(eventId == 0)
+            {
+                ViewData["Message"] = "0";
+            }
+            else
+            {
+                ViewData["Message"] = eventId + "";
+            }
+
             return View();
         }
+
 
         // POST: Donation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,orgEvent")] DonorDataModel donorDataModel)
+        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,orgEvent,eventId")] DonorDataModel donorDataModel, string eventId)
         {
             if (ModelState.IsValid)
             {
+                int eventIdentification = Int32.Parse(eventId);
+                donorDataModel.eventId = eventIdentification;
                 db.DonorDataModels.Add(donorDataModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,10 +72,11 @@ namespace GreatLakesAlliance.Controllers
             return View(donorDataModel);
         }
 
+
         // GET: Donation/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -91,7 +105,7 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // GET: Donation/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {

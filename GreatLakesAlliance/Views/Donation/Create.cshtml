@@ -5,9 +5,20 @@
 }
 
 <h2>Create</h2>
+@{ 
+    string eventId;
 
+    if ((String)ViewData["Message"] == "0") 
+    {
+        eventId = (String)ViewData["Message"];
+    }
+    else
+    {
+        eventId = (String)ViewData["Message"];
+    }
+}
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(new {@eventId = eventId}))
 {
     @Html.AntiForgeryToken()
     

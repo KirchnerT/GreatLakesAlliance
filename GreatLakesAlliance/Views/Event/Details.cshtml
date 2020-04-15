@@ -79,5 +79,6 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.eventId }) |
     @Html.ActionLink("Back to List", "Index") |
-    @Html.ActionLink("Sign Up For Event", "NotRealVolunteer", new { id = Model.eventId })
+    @Html.ActionLink("Sign Up For Event", "NotRealVolunteer", new { id = Model.eventId }) |
+    @Html.ActionLink("Donate  to Event", "Create", "Donation", new { eventId = Model.eventId }, new { eventId = Model.eventId })
 </p>
