@@ -52,6 +52,9 @@ namespace GreatLakesAlliance.Controllers
         {
             if (ModelState.IsValid)
             {
+                eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
+                eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
+
                 db.EventDataModels.Add(eventDataModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -155,10 +158,15 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // POST: Event/NotRealVolunteer/5
+        [Authorize(Roles = "Admin,Donor,Volunteer,User")]
         [HttpPost, ActionName("NotRealVolunteer")]
         [ValidateAntiForgeryToken]
         public ActionResult VolunteerOrCancel(int id, [Bind(Include = "UserId, EventId")] VolunteeredEventsModel volunteersNeeded)
         {
+          
+            //need to check if user is a 'user'.
+            //if so, change status to volunteer
+
             if( Request.Form["Volunteer"] != null)
             {
                 EventDataModel eventDataModel = db.EventDataModels.Find(id);
