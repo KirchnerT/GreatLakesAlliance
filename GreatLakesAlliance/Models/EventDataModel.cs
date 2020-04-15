@@ -8,7 +8,8 @@ namespace GreatLakesAlliance.Models
     public class EventDataModel
     {
         [Key]
-        public string eventId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int eventId { get; set; }
         public string eventName { get; set; }
         public string eventStartDate { get; set; }
         public string eventEndDate { get; set; }
@@ -18,5 +19,15 @@ namespace GreatLakesAlliance.Models
         public string endTime { get; set; }
         public string description { get; set; }
 
+    }
+
+    [Table("dbo.AspNetVolunteeredEvents")]
+    public class VolunteeredEventsModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string UserId { get; set; }
+        public int EventId { get; set; }
     }
 }

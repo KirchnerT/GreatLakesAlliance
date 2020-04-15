@@ -47,7 +47,7 @@ namespace GreatLakesAlliance.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,cardNumber,expirationDate,ccv,amount,orgEvent")] DonorDataModel donorDataModel)
+        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,orgEvent")] DonorDataModel donorDataModel)
         {
             if (ModelState.IsValid)
             {

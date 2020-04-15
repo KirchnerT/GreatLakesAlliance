@@ -11,7 +11,9 @@ namespace GreatLakesAlliance.Models
     public class DonorDataModel
     {
         [Key]
-        public string id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        public int id { get; set; }
         public string cardNumber { get; set; }
         public string expirationDate { get; set; }
         public string ccv { get; set; }

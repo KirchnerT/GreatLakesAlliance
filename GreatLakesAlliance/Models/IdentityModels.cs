@@ -38,6 +38,7 @@ namespace GreatLakesAlliance.Models
 
         object placeHolderVariable;
         public System.Data.Entity.DbSet<GreatLakesAlliance.Models.EventDataModel> EventDataModels { get; set; }
+        public System.Data.Entity.DbSet<GreatLakesAlliance.Models.VolunteeredEventsModel> VolunteeredEventsModel { get; set; }
 
         public System.Data.Entity.DbSet<GreatLakesAlliance.Models.DonorDataModel> DonorDataModels { get; set; }
     }

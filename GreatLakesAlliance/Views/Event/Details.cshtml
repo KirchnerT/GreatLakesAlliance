@@ -79,10 +79,5 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.eventId }) |
     @Html.ActionLink("Back to List", "Index") |
-
-    @{ if (Model.volunteersNeeded != 0)
-        {
-            @Html.ActionLink("Sign Up For Event", "NotRealVolunteer", new { id = Model.eventId });
-        }        
-    }
+    @Html.ActionLink("Sign Up For Event", "NotRealVolunteer", new { id = Model.eventId });
 </p>

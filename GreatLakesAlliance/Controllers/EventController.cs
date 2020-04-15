@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GreatLakesAlliance.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GreatLakesAlliance.Controllers
 {
@@ -21,9 +22,9 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // GET: Event/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -36,7 +37,7 @@ namespace GreatLakesAlliance.Controllers
         }
 
         // GET: Event/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -47,7 +48,7 @@ namespace GreatLakesAlliance.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
+        public ActionResult Create([Bind(Include = "eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
         {
             if (ModelState.IsValid)
             {
@@ -61,9 +62,9 @@ namespace GreatLakesAlliance.Controllers
 
         [Authorize(Roles = "Admin")]
         // GET: Event/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -78,7 +79,7 @@ namespace GreatLakesAlliance.Controllers
         // POST: Event/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
+        public ActionResult Edit([Bind(Include = "eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +92,9 @@ namespace GreatLakesAlliance.Controllers
 
         [Authorize(Roles = "Admin")]
         // GET: Event/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -108,7 +109,7 @@ namespace GreatLakesAlliance.Controllers
         // POST: Event/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             EventDataModel eventDataModel = db.EventDataModels.Find(id);
             db.EventDataModels.Remove(eventDataModel);
@@ -126,29 +127,67 @@ namespace GreatLakesAlliance.Controllers
         }
 
         //Volunte
-        public ActionResult NotRealVolunteer(string id)
+        public ActionResult NotRealVolunteer(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var userId = User.Identity.GetUserId();
+            var chkIfVolunteered = db.VolunteeredEventsModel.Where(a => a.EventId == id && a.UserId == userId)
+                                        .Select(a => a.Id).FirstOrDefault();
+
             EventDataModel eventDataModel = db.EventDataModels.Find(id);
-            eventDataModel.volunteersNeeded--;
+
+            if(chkIfVolunteered != 0)
+            {
+                //they are volunteered for this event
+                ViewData["Message"] = "CannotVolunteer";
+            }
+            else if(chkIfVolunteered == 0 && eventDataModel.volunteersNeeded > 0)
+            {
+                //they are not volunteeered for this event and the event still needs volunteers
+                ViewData["Message"] = "CanVolunteer";
+            }
+
             return View(eventDataModel);
         }
 
         // POST: Event/NotRealVolunteer/5
-        [HttpPost]
+        [HttpPost, ActionName("NotRealVolunteer")]
         [ValidateAntiForgeryToken]
-        public ActionResult NotRealVolunteer([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
+        public ActionResult VolunteerOrCancel(int id, [Bind(Include = "UserId, EventId")] VolunteeredEventsModel volunteersNeeded)
         {
-            if (ModelState.IsValid)
+            if( Request.Form["Volunteer"] != null)
             {
-                db.Entry(eventDataModel).State = EntityState.Modified;
+                EventDataModel eventDataModel = db.EventDataModels.Find(id);
+                eventDataModel.volunteersNeeded = eventDataModel.volunteersNeeded - 1;
+
+                VolunteeredEventsModel volunteer = new VolunteeredEventsModel();
+                volunteer.UserId = User.Identity.GetUserId();
+                volunteer.EventId = id;
+                db.VolunteeredEventsModel.Add(volunteer);
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            return View(eventDataModel);
+            else if (Request.Form["CancelVolunteer"] != null)
+            {
+                EventDataModel eventDataModel = db.EventDataModels.Find(id);
+                eventDataModel.volunteersNeeded = eventDataModel.volunteersNeeded + 1;
+                db.SaveChanges();
+
+                var userId = User.Identity.GetUserId();
+                var SQLVolunteerAndEvent = db.VolunteeredEventsModel.Where(a => a.EventId == id && a.UserId == userId)
+                                        .Select(a => a.Id).FirstOrDefault();
+
+                VolunteeredEventsModel volunteerAndEvents = db.VolunteeredEventsModel.Find(SQLVolunteerAndEvent);
+
+                db.VolunteeredEventsModel.Remove(volunteerAndEvents);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
