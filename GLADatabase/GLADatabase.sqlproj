@@ -69,5 +69,6 @@
     <Build Include="dbo\Tables\AspNetEventData.sql" />
     <Build Include="dbo\Tables\AspNetDonations.sql" />
     <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetVolunteeredEvents.sql" />
   </ItemGroup>
 </Project>

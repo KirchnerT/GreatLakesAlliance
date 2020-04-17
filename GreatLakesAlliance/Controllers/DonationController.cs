@@ -49,6 +49,8 @@ namespace GreatLakesAlliance.Controllers
                 ViewData["Message"] = eventId + "";
             }
 
+            ViewBag.Events = new SelectList(db.EventDataModels, "eventId", "eventName", eventId);
+
             return View();
         }
 
@@ -58,11 +60,21 @@ namespace GreatLakesAlliance.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,orgEvent,eventId")] DonorDataModel donorDataModel, string eventId)
+        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,eventId")] DonorDataModel donorDataModel, string eventId)
         {
             if (ModelState.IsValid)
             {
-                int eventIdentification = Int32.Parse(eventId);
+                int eventIdentification = 0;
+                //int eventIdentification = Int32.Parse(eventId);
+                try
+                {
+                    eventIdentification = Int32.Parse(Request.Form["Events"].ToString());
+                }
+                catch (SystemException e)
+                {
+
+                }
+                
                 donorDataModel.eventId = eventIdentification;
                 db.DonorDataModels.Add(donorDataModel);
                 db.SaveChanges();
@@ -93,7 +105,7 @@ namespace GreatLakesAlliance.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,cardNumber,expirationDate,ccv,amount,orgEvent")] DonorDataModel donorDataModel)
+        public ActionResult Edit([Bind(Include = "id,cardNumber,expirationDate,ccv,amount,eventId")] DonorDataModel donorDataModel)
         {
             if (ModelState.IsValid)
             {
