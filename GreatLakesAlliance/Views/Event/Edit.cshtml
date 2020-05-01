@@ -4,15 +4,49 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+@section Scripts {
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+    <link href="~/Scripts/jquery.timepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.timepicker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+        //    $('#eventStartDate').daterangepicker({
+        //        opens: 'left'
+        //    });
+
+            $('#startTime').timepicker({
+                'scrollDefault': 'now'
+            });
+
+            $('#endTime').timepicker({
+                'scrollDefault': 'now',
+            });
+        });
+
+        $('#startTime').keydown(function () {
+            return false;
+        })
+
+        $('#endTime').keydown(function () {
+            return false;
+        })
+    </script>
+}
+
+<h2 style="margin-top: 75px">Edit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>EventDataModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.eventId)
@@ -93,6 +127,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

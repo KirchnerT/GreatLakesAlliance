@@ -4,11 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="margin-top: 75px">Donations</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { eventId = 0 })
+    @Html.ActionLink("Create New", "Create", new { eventId = 0 }) 
 </p>
+
+<div class="label-warning col-md-7" style="margin-bottom: 10px">
+    *NOTE: IF ANY INFORMATION BELOW IS INCORRECT. PLEASE CONTACT SUPPORT*
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -40,12 +45,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.amount)
         </td>
+    </tr>
+}
+
+@if(Model.Count() == 0)
+{
+    <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            You do not have any previous donations.
         </td>
     </tr>
+    
 }
 
 </table>

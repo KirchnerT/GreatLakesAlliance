@@ -18,7 +18,7 @@ namespace GreatLakesAlliance.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            return View(db.EventDataModels.ToList());
+            return View(db.EventDataModels.OrderBy(a => a.eventStartDate).ToList());
         }
 
         // GET: Event/Details/5
@@ -55,6 +55,16 @@ namespace GreatLakesAlliance.Controllers
                 eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
                 eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
 
+                if(eventDataModel.startTime == null)
+                {
+                    eventDataModel.startTime = "12:00am";
+                }
+
+                if (eventDataModel.endTime == null)
+                {
+                    eventDataModel.endTime = "11:59pm";
+                }
+
                 db.EventDataModels.Add(eventDataModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,6 +96,19 @@ namespace GreatLakesAlliance.Controllers
         {
             if (ModelState.IsValid)
             {
+                //eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
+                //eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
+
+                if (eventDataModel.startTime == null)
+                {
+                    eventDataModel.startTime = "12:00am";
+                }
+
+                if (eventDataModel.endTime == null)
+                {
+                    eventDataModel.endTime = "11:59pm";
+                }
+
                 db.Entry(eventDataModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -169,7 +192,58 @@ namespace GreatLakesAlliance.Controllers
 
             if( Request.Form["Volunteer"] != null)
             {
+                string userId = User.Identity.GetUserId();
+
+                var SQLVolunteerAndEventsList = db.VolunteeredEventsModel.Where(a => a.UserId == userId)
+                                               .Select(a => a.EventId).ToList();
+
+                //EventDataModel databaseEvent;
                 EventDataModel eventDataModel = db.EventDataModels.Find(id);
+
+                for (int i = 0; i < SQLVolunteerAndEventsList.Count; i++) 
+                {
+                    EventDataModel databaseEvent = db.EventDataModels.Find(SQLVolunteerAndEventsList[i]);
+
+                    //check if the date ranges don't overlap
+                    if (eventDataModel.eventStartDate.CompareTo(databaseEvent.eventEndDate) > 0)
+                    {
+                        //they do not overlap
+                    }
+                    else if (eventDataModel.eventEndDate.CompareTo(databaseEvent.eventStartDate) < 0)
+                    {
+                        //they do not overlap
+                    }
+                    else
+                    {
+                        //the dates overlap somewhere 
+                        //check if the ends of the dates just touch
+
+                        if (eventDataModel.eventStartDate.Equals(databaseEvent.eventEndDate))
+                        {
+                            DateTime dbEnd = DateTime.Parse(databaseEvent.endTime);
+                            DateTime eventStart = DateTime.Parse(eventDataModel.startTime);
+
+                            if (DateTime.Compare(dbEnd, eventStart) > 0)
+                            {
+                                return RedirectToAction("NotRealVolunteer");
+                            }
+                            
+                        }
+                        else if (eventDataModel.eventEndDate.Equals(databaseEvent.eventStartDate))
+                        {
+                            DateTime dbStart = DateTime.Parse(databaseEvent.startTime);
+                            DateTime eventEnd = DateTime.Parse(eventDataModel.endTime);
+
+                            if (DateTime.Compare(dbStart, eventEnd) < 0)
+                            {
+                                return RedirectToAction("NotRealVolunteer");
+                            }
+                        }
+                    }
+                }
+
+                //the users other volunteer times do not overlap so they can volunteer
+
                 eventDataModel.volunteersNeeded = eventDataModel.volunteersNeeded - 1;
 
                 VolunteeredEventsModel volunteer = new VolunteeredEventsModel();

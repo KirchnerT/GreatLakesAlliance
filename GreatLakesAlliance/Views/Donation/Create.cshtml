@@ -4,7 +4,8 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2 style="margin-top: 75px">Create</h2>
+
 @{
     string eventId;
 
@@ -31,14 +32,13 @@
     </script>
 }
 
-
-
 @using (Html.BeginForm(new { @eventId = eventId }))
 {
     @Html.AntiForgeryToken()
 
+   
+
     <div class="form-horizontal">
-        <h4>DonorDataModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -100,14 +100,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Donate" class="btn btn-default" />
+                <div class="label-warning" style="margin-top: 10px; width: 80%">
+                    *NOTE: ONCE YOU HIT 'DONATE' YOU WILL BE UNABLE TO CHANGE ANY OF THE IMFORMATION ABOVE*
+                </div>
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("View Previous Donations", "Index")
 </div>
 
 

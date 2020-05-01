@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GreatLakesAlliance.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GreatLakesAlliance.Controllers
 {
@@ -18,23 +19,9 @@ namespace GreatLakesAlliance.Controllers
         // GET: Donation
         public ActionResult Index()
         {
-            return View(db.DonorDataModels.ToList());
-        }
-
-        // GET: Donation/Details/5
-        public ActionResult Details(int id)
-        {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DonorDataModel donorDataModel = db.DonorDataModels.Find(id);
-            if (donorDataModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(donorDataModel);
-        }
+            var userId = User.Identity.GetUserId();
+            return View(db.DonorDataModels.Where(a => a.userId == userId).ToList());
+        }      
 
         // GET: Donation/Create
         [HttpGet]
@@ -60,7 +47,7 @@ namespace GreatLakesAlliance.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,eventId")] DonorDataModel donorDataModel, string eventId)
+        public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,eventId,userId,fullName")] DonorDataModel donorDataModel, string eventId)
         {
             if (ModelState.IsValid)
             {
@@ -74,73 +61,17 @@ namespace GreatLakesAlliance.Controllers
                 {
 
                 }
-                
+
                 donorDataModel.eventId = eventIdentification;
+                donorDataModel.fullName = User.Identity.Name;
+                donorDataModel.userId = User.Identity.GetUserId();
                 db.DonorDataModels.Add(donorDataModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(donorDataModel);
-        }
-
-
-        // GET: Donation/Edit/5
-        public ActionResult Edit(int id)
-        {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DonorDataModel donorDataModel = db.DonorDataModels.Find(id);
-            if (donorDataModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(donorDataModel);
-        }
-
-        // POST: Donation/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,cardNumber,expirationDate,ccv,amount,eventId")] DonorDataModel donorDataModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(donorDataModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(donorDataModel);
-        }
-
-        // GET: Donation/Delete/5
-        public ActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DonorDataModel donorDataModel = db.DonorDataModels.Find(id);
-            if (donorDataModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(donorDataModel);
-        }
-
-        // POST: Donation/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            DonorDataModel donorDataModel = db.DonorDataModels.Find(id);
-            db.DonorDataModels.Remove(donorDataModel);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        }      
 
         protected override void Dispose(bool disposing)
         {
