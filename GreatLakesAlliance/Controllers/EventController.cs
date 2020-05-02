@@ -18,7 +18,9 @@ namespace GreatLakesAlliance.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            return View(db.EventDataModels.OrderBy(a => a.eventStartDate).ToList());
+            String dateNow = DateTime.Now.ToString("MM/dd/yyyy");
+
+            return View(db.EventDataModels.Where(a => a.eventEndDate.CompareTo(dateNow) >= 0).OrderBy(a => a.eventStartDate).ToList());
         }
 
         // GET: Event/Details/5
@@ -92,12 +94,12 @@ namespace GreatLakesAlliance.Controllers
         // POST: Event/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
+        public ActionResult Edit([Bind(Include = "eventId,eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
         {
             if (ModelState.IsValid)
             {
-                //eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
-                //eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
+                eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
+                eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
 
                 if (eventDataModel.startTime == null)
                 {

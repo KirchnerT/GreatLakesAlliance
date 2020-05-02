@@ -36,8 +36,21 @@ namespace GreatLakesAlliance.Controllers
                 ViewData["Message"] = eventId + "";
             }
 
-            ViewBag.Events = new SelectList(db.EventDataModels, "eventId", "eventName", eventId);
+            String dateNow = DateTime.Now.ToString("MM/dd/yyyy");
 
+            
+
+            var activeEventId = db.EventDataModels.Where(a => a.eventEndDate.CompareTo(dateNow) >= 0)
+                                        .Select(a => a.eventId).ToList();
+
+            List<EventDataModel> e = new List<EventDataModel>();
+
+            foreach (int item in activeEventId)
+            {                
+                e.Add(db.EventDataModels.Find(item));
+            }
+                                            
+            ViewBag.Events = new SelectList(e, "eventId", "eventName", eventId);  
             return View();
         }
 
