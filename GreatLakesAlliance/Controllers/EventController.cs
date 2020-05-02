@@ -247,6 +247,7 @@ namespace GreatLakesAlliance.Controllers
                 eventDataModel.volunteersNeeded = eventDataModel.volunteersNeeded - 1;
 
                 VolunteeredEventsModel volunteer = new VolunteeredEventsModel();
+                volunteer.FullName = User.Identity.Name;
                 volunteer.UserId = User.Identity.GetUserId();
                 volunteer.EventId = id;
                 db.VolunteeredEventsModel.Add(volunteer);
