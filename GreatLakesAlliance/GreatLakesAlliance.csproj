@@ -594,6 +594,9 @@
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Reports\Volunteers.cshtml" />
+    <Content Include="Views\Reports\Donations.cshtml" />
+    <Content Include="Views\Reports\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

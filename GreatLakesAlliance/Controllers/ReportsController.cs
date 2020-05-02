@@ -1,15 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GreatLakesAlliance.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GreatLakesAlliance.Controllers
 {
     public class ReportsController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Reports
         public ActionResult Index()
+        {
+            ViewBag.Users = new SelectList(db.Users, "Id", "FullName");
+
+            return View();
+        }
+
+        public ActionResult GetReport()
+        {
+            return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Volunteers()
+        {
+            return View();
+        }
+
+        public ActionResult Donations()
+        {
+            return View();
+        }
+
+        public ActionResult Users()
         {
             return View();
         }

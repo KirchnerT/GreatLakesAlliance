@@ -64,6 +64,7 @@ namespace GreatLakesAlliance.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+        public bool Deleted { get; set; }
     }
 
     public class RegisterViewModel

@@ -16,6 +16,8 @@ namespace GreatLakesAlliance.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ManageController()
         {
         }
@@ -384,6 +386,22 @@ namespace GreatLakesAlliance.Controllers
             Error
         }
 
-#endregion
+        public ActionResult DeleteAccount()
+        {
+            var userId = User.Identity.GetUserId();
+
+            //var currentUser = UserManager.Users.Where(a => a.Id.Equals(userId)).First();
+            //currentUser.Deleted = true;
+
+            var realUser = db.Users.Find(userId);
+            realUser.Deleted = true;
+
+            db.SaveChanges();
+
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+
+        #endregion
     }
 }

@@ -77,6 +77,15 @@ namespace GreatLakesAlliance.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+
+            var currUser = UserManager.Users.Where(a => a.UserName.Equals(model.UserName)).First();
+                            
+            if (currUser != null && currUser.Deleted == true)
+            {
+                result = SignInStatus.Failure;
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            }
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -507,5 +516,7 @@ namespace GreatLakesAlliance.Controllers
             }
         }
         #endregion
+
+      
     }
 }

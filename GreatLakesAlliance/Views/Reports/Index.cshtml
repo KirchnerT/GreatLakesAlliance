@@ -1,11 +1,56 @@
 ﻿
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2 style="margin-top: 75px">Reports</h2>
+<script>
+
+
+
+</script>
+
+
+<h2 style="margin-top: 75px; margin-bottom: 25px">Reports</h2>
 
 <div>
-    @Html.ActionLink("Back", "Admin", "Home")
+    <div class="col-md-3">
+        @Html.ActionLink("Volunteers", "Volunteers", "Reports")
+    </div>
+    <div class="col-md-7">
+        <p>This report grabs the volunteeres for events hosted by this organization.</p>
+    </div>
 </div>
+<div>
+    <div class="col-md-3">
+        @Html.ActionLink("Donations", "Donations", "Reports")
+    </div>
+    <div class="col-md-7">
+        <p>All donations that have been made to both the organization and individual events.</p>
+    </div>
+</div>
+<div>
+    <div class="col-md-3">
+        @Html.ActionLink("Users", "Users", "Reports")
+    </div>
+    <div class="col-md-7">
+        <p>Get a list of all users using this site.</p>
+    </div>
+</div>
+
+@*<div class="form-group">
+    <div class="control-label col-md-2">
+        Select User(s)
+    </div>
+    <div class="col-md-10">
+        @Html.DropDownList("Users", null, "--All Users--", new { @class = "form-control", id = "dropDownList" })
+    </div>
+</div>*@
+
+<div class="form-group" style="margin-top: 15%; margin-bottom: 20%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back" onclick="location.href='@Url.Action("Admin", "Home")'" /> 
+    </div> 
+</div>
+
 

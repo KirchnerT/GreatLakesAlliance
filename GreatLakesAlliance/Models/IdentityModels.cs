@@ -13,6 +13,7 @@ namespace GreatLakesAlliance.Models
         [Display(Name ="Full Name"), Required]        
         [StringLength(100)]
         public string FullName { get; set; }
+        public bool Deleted { get; set; }
         //public bool Gender { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
