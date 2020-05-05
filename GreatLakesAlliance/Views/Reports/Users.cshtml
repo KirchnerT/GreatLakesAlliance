@@ -1,7 +1,52 @@
-﻿
+﻿@model IEnumerable<GreatLakesAlliance.Models.UserModel>
+
+
 @{
     ViewBag.Title = "Users";
 }
 
 <h2 style="margin-top: 75px">Users</h2>
 
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="hi">
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+
+                @Html.ActionLink("Get Info", "UserData", new { userId = item.Id })
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="form-group" style="margin-bottom: 8%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back To Reports" onclick="location.href='@Url.Action("", "Reports")'" />
+    </div>
+</div>

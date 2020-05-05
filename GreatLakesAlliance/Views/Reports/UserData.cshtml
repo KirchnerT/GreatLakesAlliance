@@ -1,0 +1,77 @@
+﻿@model GreatLakesAlliance.Models.UserData
+
+
+<h2 style="margin-top: 75px">@ViewBag.name</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Events Volunteered To:
+        </th>
+        <th>
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.volunteer)
+    {
+        <tr id="hi">
+            <td>
+                @Html.DisplayFor(modelItem => item.eventName)
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Event Donated To:
+        </th>
+        <th>
+            Amount Donated:
+        </th>
+        <th>
+            Card Number:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.donations)
+    {
+<tr id="hi">
+    <td>
+        @Html.DisplayFor(modelItem => item.eventName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.amount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.cardNumber)
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+</tr>
+    }
+
+</table>
+
+<div class="form-group" style="margin-bottom: 8%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back To Users" onclick="location.href='@Url.Action("Users", "Reports")'" />
+    </div>
+</div>

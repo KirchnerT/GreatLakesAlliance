@@ -1,7 +1,44 @@
-﻿
+﻿@model IEnumerable<GreatLakesAlliance.Models.VolunteerModel>
+
 @{
     ViewBag.Title = "Volunteers";
 }
 
 <h2 style="margin-top: 75px">Volunteers</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Event Volunteered
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.eventName)
+            </td>
+
+
+        </tr>
+    }
+
+
+</table>
+
+<div class="form-group" style="margin-bottom: 8%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back To Reports" onclick="location.href='@Url.Action("", "Reports")'" />
+    </div>
+</div>
