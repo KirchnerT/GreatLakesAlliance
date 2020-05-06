@@ -19,13 +19,15 @@ namespace GreatLakesAlliance.Controllers
         public ActionResult Index()
         {
             String dateNow = DateTime.Now.ToString("MM/dd/yyyy");
-
+            
+            //sends a list of all active/future events to the view
             return View(db.EventDataModels.Where(a => a.eventEndDate.CompareTo(dateNow) >= 0).OrderBy(a => a.eventStartDate).ToList());
         }
 
         // GET: Event/Details/5
         public ActionResult Details(int id)
         {
+            //grabbing event details, if an event is found
             if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -45,9 +47,7 @@ namespace GreatLakesAlliance.Controllers
             return View();
         }
 
-        // POST: Event/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Event/Create       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "eventName,eventStartDate,eventEndDate,volunteersNeeded,location,startTime,endTime,description")] EventDataModel eventDataModel)
@@ -57,6 +57,7 @@ namespace GreatLakesAlliance.Controllers
                 eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
                 eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
 
+                //sets a time if no time was selected in the create form
                 if(eventDataModel.startTime == null)
                 {
                     eventDataModel.startTime = "12:00am";
@@ -101,6 +102,7 @@ namespace GreatLakesAlliance.Controllers
                 eventDataModel.eventEndDate = eventDataModel.eventStartDate.Substring(13, 10);
                 eventDataModel.eventStartDate = eventDataModel.eventStartDate.Substring(0, 10);
 
+                //sets a time if no time was selected in the create form
                 if (eventDataModel.startTime == null)
                 {
                     eventDataModel.startTime = "12:00am";
@@ -139,6 +141,8 @@ namespace GreatLakesAlliance.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //finds the event in the database and deletes it 
+
             EventDataModel eventDataModel = db.EventDataModels.Find(id);
             db.EventDataModels.Remove(eventDataModel);
             db.SaveChanges();
@@ -154,7 +158,7 @@ namespace GreatLakesAlliance.Controllers
             base.Dispose(disposing);
         }
 
-        //Volunte
+        //Volunteer/Unvolunteer method
         public ActionResult NotRealVolunteer(int id)
         {
             if (id == 0)
@@ -162,6 +166,7 @@ namespace GreatLakesAlliance.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            //checks if the user has volunteered or not to this event
             var userId = User.Identity.GetUserId();
             var chkIfVolunteered = db.VolunteeredEventsModel.Where(a => a.EventId == id && a.UserId == userId)
                                         .Select(a => a.Id).FirstOrDefault();
@@ -190,7 +195,7 @@ namespace GreatLakesAlliance.Controllers
         {
           
             //need to check if user is a 'user'.
-            //if so, change status to volunteer
+            //if so, change role to volunteer
 
             if( Request.Form["Volunteer"] != null)
             {
@@ -244,6 +249,7 @@ namespace GreatLakesAlliance.Controllers
                     }
                 }
 
+                //if this far
                 //the users other volunteer times do not overlap so they can volunteer
 
                 eventDataModel.volunteersNeeded = eventDataModel.volunteersNeeded - 1;

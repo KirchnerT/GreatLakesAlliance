@@ -219,6 +219,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\EventOnNav.jpg" />
     <Content Include="Content\gl1.png" />
     <Content Include="Content\GLALOGO1.png" />
     <Content Include="Content\GLAVOLUNTEER.jpg" />
@@ -522,24 +523,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Admin\fonts\digital-7-webfont.eot" />
@@ -599,6 +591,12 @@
     <Content Include="Views\Reports\Donations.cshtml" />
     <Content Include="Views\Reports\Users.cshtml" />
     <Content Include="Views\Reports\UserData.cshtml" />
+    <Content Include="Views\Help\EventDetails.cshtml" />
+    <Content Include="Views\Help\EventVolunteer.cshtml" />
+    <Content Include="Views\Help\EventDonate.cshtml" />
+    <Content Include="Views\Help\AdminRoles.cshtml" />
+    <Content Include="Views\Help\AdminDelete.cshtml" />
+    <Content Include="Views\Help\AdminReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

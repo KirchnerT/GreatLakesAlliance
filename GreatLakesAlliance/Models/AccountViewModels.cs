@@ -48,7 +48,6 @@ namespace GreatLakesAlliance.Models
 
     public class LoginViewModel
     {
-        //[Required]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
@@ -113,13 +112,5 @@ namespace GreatLakesAlliance.Models
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
-    }
-
-    public class ForgotPasswordViewModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
     }
 }

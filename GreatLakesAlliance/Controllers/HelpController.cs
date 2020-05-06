@@ -13,5 +13,35 @@ namespace GreatLakesAlliance.Controllers
         {
             return View();
         }
+
+        public ActionResult EventDetails()
+        {
+            return View();
+        }
+
+        public ActionResult EventVolunteer()
+        {
+            return View();
+        }
+
+        public ActionResult EventDonate()
+        {
+            return View();
+        }
+
+        public ActionResult AdminRoles()
+        {
+            return View();
+        }
+
+        public ActionResult AdminDelete()
+        {
+            return View();
+        }
+
+        public ActionResult AdminReports()
+        {
+            return View();
+        }
     }
 }

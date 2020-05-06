@@ -27,6 +27,8 @@ namespace GreatLakesAlliance.Controllers
         [HttpGet]
         public ActionResult Create(int eventId)
         {
+            //checks if there is no event selected
+            //if 0, then set the selected donation location to GLA
             if(eventId == 0)
             {
                 ViewData["Message"] = "0";
@@ -36,15 +38,16 @@ namespace GreatLakesAlliance.Controllers
                 ViewData["Message"] = eventId + "";
             }
 
-            String dateNow = DateTime.Now.ToString("MM/dd/yyyy");
+            String dateNow = DateTime.Now.ToString("MM/dd/yyyy");       
 
-            
-
+            //Grabs a list of all events that are going on or 
+            //have yet to start
             var activeEventId = db.EventDataModels.Where(a => a.eventEndDate.CompareTo(dateNow) >= 0)
                                         .Select(a => a.eventId).ToList();
 
             List<EventDataModel> e = new List<EventDataModel>();
 
+            //adds a list of all the events into a model to go into the view
             foreach (int item in activeEventId)
             {                
                 e.Add(db.EventDataModels.Find(item));
@@ -55,9 +58,7 @@ namespace GreatLakesAlliance.Controllers
         }
 
 
-        // POST: Donation/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Donation/Create     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "cardNumber,expirationDate,ccv,amount,eventId,userId,fullName")] DonorDataModel donorDataModel, string eventId)
@@ -65,7 +66,6 @@ namespace GreatLakesAlliance.Controllers
             if (ModelState.IsValid)
             {
                 int eventIdentification = 0;
-                //int eventIdentification = Int32.Parse(eventId);
                 try
                 {
                     eventIdentification = Int32.Parse(Request.Form["Events"].ToString());
@@ -75,6 +75,7 @@ namespace GreatLakesAlliance.Controllers
 
                 }
 
+                //changes all information into a model to go into the database
                 donorDataModel.eventId = eventIdentification;
                 donorDataModel.fullName = User.Identity.Name;
                 donorDataModel.userId = User.Identity.GetUserId();
@@ -86,6 +87,7 @@ namespace GreatLakesAlliance.Controllers
             return View(donorDataModel);
         }      
 
+        //a cleanup method
         protected override void Dispose(bool disposing)
         {
             if (disposing)

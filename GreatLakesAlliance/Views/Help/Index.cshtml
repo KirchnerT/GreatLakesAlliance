@@ -3,7 +3,64 @@
     ViewBag.Title = "Index";
 }
 
-<h2 style="margin-top: 75px">Need Help?</h2>
+<h2 style="margin-top: 75px; margin-bottom: 25px">Need Help?</h2>
 
-<p>**add help interface here**</p>
+<table>
+    <tr>
+        <td class="h3 col-md-1" style="padding-bottom: 10px">
+            Account
+        </td>
+        <td class="h3 col-md-1" style="padding-bottom: 10px">
+            Events
+        </td>
+    </tr>
+    <tr>
+        <td class="col-md-1" style="padding-bottom:50px">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Creating an account.", "Register", "Account") <br />
+            }
 
+            @if (!User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete your account.", "", "Manage") <br />
+                @Html.ActionLink("Change password.", "", "Manage")
+            }
+            else
+            {
+                @Html.ActionLink("Change password.", "", "Manage")
+            }
+        </td>
+        <td class="col-md-1" style="padding-bottom:50px">
+            @Html.ActionLink("Find event details.", "EventDetails") <br />
+            @Html.ActionLink("Volunteer/Unvolunteer for events.", "EventVolunteer") <br />
+            @Html.ActionLink("Donate to an event.", "EventDonate")
+        </td>
+    </tr>
+    <tr>
+        <td class="h3 col-md-1" style="padding-bottom: 10px">
+            Donating
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+            <td class="h3 col-md-1" style="padding-bottom: 10px">
+                Admin
+            </td>
+        }       
+    </tr>
+    <tr>
+        <td class="col-md-1">
+            @Html.ActionLink("Donate.", "Create", "Donation", new { eventId = 0 }, null) <br />
+            @Html.ActionLink("Donate to an event.", "EventDonate") <br />
+            @Html.ActionLink("View previous donations.", "", "Donation")
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+            <td class="col-md-1">
+                @Html.ActionLink("Change user roles.", "AdminRoles") <br />
+                @Html.ActionLink("Delete a users account.", "AdminDelete") <br />
+                @Html.ActionLink("View Reports.", "AdminReports")
+            </td>
+        }
+    </tr>
+</table>

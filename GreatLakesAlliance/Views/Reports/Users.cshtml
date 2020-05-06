@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<GreatLakesAlliance.Models.UserModel>
+@using Microsoft.AspNet.Identity;
 
 
 @{
@@ -36,6 +37,12 @@
             <td>
             </td>
             <td>
+                @if (item.Id != User.Identity.GetUserId() && !item.Deleted)
+                {
+                    @Html.ActionLink("Delete", "DeleteAccount", new { userId = item.Id })
+                    <a>|</a>
+                }
+                
 
                 @Html.ActionLink("Get Info", "UserData", new { userId = item.Id })
 

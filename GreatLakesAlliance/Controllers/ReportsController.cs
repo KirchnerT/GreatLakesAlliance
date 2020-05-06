@@ -35,6 +35,8 @@ namespace GreatLakesAlliance.Controllers
 
             List<VolunteerModel> realList = new List<VolunteerModel>();
 
+            //adds all volunteers to the model 'realList'
+            //which holds specific information for the reports
             foreach (var item in volunteers)
             {
                 VolunteerModel tempVol = new VolunteerModel();
@@ -46,10 +48,11 @@ namespace GreatLakesAlliance.Controllers
                 string eName = db.EventDataModels.Where(a => a.eventId == item.EventId).Select(a => a.eventName).First();
                 tempVol.eventName = eName;
                 
-
+                //adds temp volunteer to full list of volunteers
                 realList.Add(tempVol);
             }
 
+            //reorders the list to sort by event volunteered at
             realList = realList.OrderBy(a => a.eventName).ToList();
 
             return View(realList);
@@ -61,6 +64,7 @@ namespace GreatLakesAlliance.Controllers
 
             List<DonorModel> realDonors = new List<DonorModel>();
 
+            //goes through all donations in 'donators' and adds them to 'realDonors'
             foreach (var item in donators)
             {
                 DonorModel tempDonor = new DonorModel();
@@ -70,6 +74,7 @@ namespace GreatLakesAlliance.Controllers
                 tempDonor.fullName = item.fullName;
                 tempDonor.userId = item.userId;
 
+                //checks if the donation was made to the GLA or not
                 string eName = "Great Lakes Alliance";
                 if (!(item.eventId == 0))
                 {
@@ -92,12 +97,14 @@ namespace GreatLakesAlliance.Controllers
             List<ApplicationUser> users = db.Users.OrderBy(a => a.FullName).ToList();
             List<UserModel> realUsers = new List<UserModel>();
 
+            //puts all users in the 'realUsers' list
             foreach (var item in users)
             {
                 UserModel tempUser = new UserModel();
                 tempUser.FullName = item.FullName;
                 tempUser.Email = item.Email;
                 tempUser.Id = item.Id;
+                tempUser.Deleted = item.Deleted;
 
                 realUsers.Add(tempUser);
             }
@@ -109,12 +116,15 @@ namespace GreatLakesAlliance.Controllers
         {
             UserData userData = new UserData();
 
+            //lists of volunteers and donations from db
             List<VolunteeredEventsModel> volunteered = db.VolunteeredEventsModel.Where(a => a.UserId == userId).ToList();
             List<DonorDataModel> donations = db.DonorDataModels.Where(a => a.userId == userId).ToList();
 
+            //helper lists that will be added to 'userData'
             List<ShortVolunteer> allVol = new List<ShortVolunteer>();
             List<ShortDonation> allDonations = new List<ShortDonation>();
 
+            //adding items to the 'allVol' list
             foreach (var item in volunteered)
             {
                 ShortVolunteer temp = new ShortVolunteer();
@@ -126,6 +136,7 @@ namespace GreatLakesAlliance.Controllers
 
             }
 
+            //adding items to the 'allDonations' list
             foreach (var item in donations)
             {
                 ShortDonation temp = new ShortDonation();
@@ -143,12 +154,24 @@ namespace GreatLakesAlliance.Controllers
                 allDonations.Add(temp);
             }
 
+            //adds the 2 lists the the 'userData' model
             userData.donations = allDonations;
             userData.volunteer = allVol;
 
             ViewBag.name = db.Users.Where(a => a.Id == userId).Select(a => a.FullName).First();
 
             return View(userData);
+        }
+
+        public ActionResult DeleteAccount(string userId)
+        {
+            //grabs user account and sets the deleted bool to true
+            ApplicationUser user = db.Users.Where(a => a.Id == userId).First();
+            user.Deleted = true;
+
+            db.SaveChanges();
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
