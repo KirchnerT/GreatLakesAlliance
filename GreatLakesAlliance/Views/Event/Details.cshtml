@@ -7,11 +7,10 @@
 <h2 style="margin-top: 75px">Details</h2>
 
 <div>
-    <h4>EventDataModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.eventName)
+            Event Name
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.eventStartDate)
+            Start Date
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.eventEndDate)
+            End Date
         </dt>
 
         <dd>
@@ -35,23 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.volunteersNeeded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.volunteersNeeded)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.startTime)
+            Start Time
         </dt>
 
         <dd>
@@ -59,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.endTime)
+            End Time
         </dt>
 
         <dd>
@@ -67,7 +50,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.description)
+            Volunteers Needed
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.volunteersNeeded)
+        </dd>
+
+        <dt>
+            Location
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            Description
         </dt>
 
         <dd>

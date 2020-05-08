@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "errorEvent";
+}
+
+<h2 style="margin-top: 75px">OH NO! Looks like you are already signed up for an event at this time!</h2>
+<div>
+    <img src="~/Content/sadfish.png" />
+</div>
+<div class="form-group" style="margin-top: 5%; margin-bottom: 10%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back to Events List" onclick="location.href='@Url.Action("", "Event")'" />
+    </div>
+</div>

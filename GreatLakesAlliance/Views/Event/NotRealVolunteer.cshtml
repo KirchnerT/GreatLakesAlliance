@@ -6,6 +6,8 @@
 @{ 
     bool volunteer = false;
     bool cancelVolunteer = false;
+    bool error = false;
+
     if ((String)ViewData["Message"] == "CannotVolunteer")
     {
         cancelVolunteer = true;
@@ -14,15 +16,20 @@
     {
         volunteer = true;
     }
+    else if ((String)ViewData["Message"] == "error")
+    {
+        error = true;
+    }
     else
     {
         cancelVolunteer = true;
         volunteer = true;
     }
 
+
 }
 
-<h2 style="margin-top: 100px"</h2>
+<h2 style="margin-top: 55px"></h2>
 
 @using (Html.BeginForm())
 {
@@ -31,23 +38,27 @@
 <div class="form-horizontal">
 
     <div class="form-group" hidden="@cancelVolunteer">
+        <h2 style="margin-bottom: 20px">
+            Volunteer for this event?
+        </h2>
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" name="Volunteer" value="Volunteer" class="btn btn-default"/>
+            <input type="button" title="Delete" class="btn btn-default" value="Back" onclick="location.href='@Url.Action("Details", "Event", new { id = Model.eventId })'" />
+            <input id="vol" type="submit" name="Volunteer" value="Volunteer" class="btn btn-default" />
         </div>
     </div>
 
-    <div class="form-group" hidden="@volunteer" >
+    <div class="form-group" hidden="@volunteer">
+        <h2 style="margin-bottom: 20px">
+            Unvolunteer for this event?
+        </h2>
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" name="CancelVolunteer" value="Cancel Volunteer" class="btn btn-default"/>
+            <input type="button" title="Delete" class="btn btn-default" value="Back" onclick="location.href='@Url.Action("Details", "Event", new { id = Model.eventId })'" />
+            <input type="submit" name="CancelVolunteer" value="Cancel Volunteer" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
-
-<div>
-    @Html.ActionLink("Back to Event", "Details", new { id = Model.eventId })     
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

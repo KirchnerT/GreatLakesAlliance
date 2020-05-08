@@ -10,76 +10,81 @@
     @{
         if (User.IsInRole("Admin"))
         {
-            @Html.ActionLink("Create New", "Create")
+        <div>
+            <div>
+                <input type="submit" value="Create New Event" class="btn btn-default" style="width: 150px" onclick="location.href='@Url.Action("Create", "Event")'" />
+            </div>
+        </div>
         }
     }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.eventName)
+            Event Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.eventStartDate)
+            Start Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.eventEndDate)
+            End Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.volunteersNeeded)
+            Start Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.location)
+            End Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.startTime)
+            Volunteers Needed
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.endTime)
+            Location
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            Description
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.eventName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.eventStartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.eventEndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.volunteersNeeded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.startTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.endTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @{ if (User.IsInRole("Admin"))
-               {
-                    <a>@Html.ActionLink("Edit", "Edit", new { id = item.eventId }) | </a>
-                    <a>@Html.ActionLink("Delete", "Delete", new { id = item.eventId }) | </a>
-               }
-            }
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.eventName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.eventStartDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.eventEndDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.startTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.endTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.volunteersNeeded)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.location)
+    </td>
 
-            @Html.ActionLink("Details", "Details", new { id = item.eventId })
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.description)
+    </td>
+    <td>
+        @{ if (User.IsInRole("Admin"))
+            {
+                <a>@Html.ActionLink("Edit", "Edit", new { id = item.eventId }) | </a>
+                <a>@Html.ActionLink("Delete", "Delete", new { id = item.eventId }) | </a>
+            }
+        }
+
+        @Html.ActionLink("Details", "Details", new { id = item.eventId })
+    </td>
+</tr>
 }
 
 </table>

@@ -211,42 +211,55 @@ namespace GreatLakesAlliance.Controllers
                 {
                     EventDataModel databaseEvent = db.EventDataModels.Find(SQLVolunteerAndEventsList[i]);
 
-                    //check if the date ranges don't overlap
-                    if (eventDataModel.eventStartDate.CompareTo(databaseEvent.eventEndDate) > 0)
+                    if(databaseEvent != null)
                     {
-                        //they do not overlap
-                    }
-                    else if (eventDataModel.eventEndDate.CompareTo(databaseEvent.eventStartDate) < 0)
-                    {
-                        //they do not overlap
-                    }
-                    else
-                    {
-                        //the dates overlap somewhere 
-                        //check if the ends of the dates just touch
-
-                        if (eventDataModel.eventStartDate.Equals(databaseEvent.eventEndDate))
+                        //check if the date ranges don't overlap
+                        if (eventDataModel.eventStartDate.CompareTo(databaseEvent.eventEndDate) > 0)
                         {
-                            DateTime dbEnd = DateTime.Parse(databaseEvent.endTime);
-                            DateTime eventStart = DateTime.Parse(eventDataModel.startTime);
-
-                            if (DateTime.Compare(dbEnd, eventStart) > 0)
-                            {
-                                return RedirectToAction("NotRealVolunteer");
-                            }
-                            
+                            //they do not overlap
                         }
-                        else if (eventDataModel.eventEndDate.Equals(databaseEvent.eventStartDate))
+                        else if (eventDataModel.eventEndDate.CompareTo(databaseEvent.eventStartDate) < 0)
                         {
-                            DateTime dbStart = DateTime.Parse(databaseEvent.startTime);
-                            DateTime eventEnd = DateTime.Parse(eventDataModel.endTime);
+                            //they do not overlap
+                        }
+                        else
+                        {
+                            //the dates overlap somewhere 
+                            //check if the ends of the dates just touch
 
-                            if (DateTime.Compare(dbStart, eventEnd) < 0)
+                            if (eventDataModel.eventStartDate.Equals(databaseEvent.eventEndDate))
                             {
-                                return RedirectToAction("NotRealVolunteer");
+                                DateTime dbEnd = DateTime.Parse(databaseEvent.endTime);
+                                DateTime eventStart = DateTime.Parse(eventDataModel.startTime);
+
+                                if (DateTime.Compare(dbEnd, eventStart) > 0)
+                                {
+                                    return RedirectToAction("errorEvent");
+                                }
+
+                            }
+                            else if (eventDataModel.eventEndDate.Equals(databaseEvent.eventStartDate))
+                            {
+                                DateTime dbStart = DateTime.Parse(databaseEvent.startTime);
+                                DateTime eventEnd = DateTime.Parse(eventDataModel.endTime);
+
+                                if (DateTime.Compare(dbStart, eventEnd) < 0)
+                                {
+                                    return RedirectToAction("errorEvent");
+                                }
+                            } else if (eventDataModel.eventStartDate.Equals(databaseEvent.eventStartDate))
+                            {
+                                DateTime dbStart = DateTime.Parse(databaseEvent.startTime);
+                                DateTime eventEnd = DateTime.Parse(eventDataModel.endTime);
+
+                                if (DateTime.Compare(dbStart, eventEnd) < 0)
+                                {
+                                    return RedirectToAction("errorEvent");
+                                }
                             }
                         }
                     }
+                    
                 }
 
                 //if this far
@@ -279,6 +292,11 @@ namespace GreatLakesAlliance.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult errorEvent()
+        {
+            return View();
         }
     }
 }

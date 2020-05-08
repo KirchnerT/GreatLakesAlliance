@@ -213,17 +213,25 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AdminNavBar.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DeleteUserExample.jpg" />
+    <Content Include="Content\DonateToEvent.jpg" />
+    <Content Include="Content\EventDetails.jpg" />
     <Content Include="Content\EventOnNav.jpg" />
     <Content Include="Content\gl1.png" />
     <Content Include="Content\GLALOGO1.png" />
     <Content Include="Content\GLAVOLUNTEER.jpg" />
     <Content Include="Content\GLAVOLUNTEER2.jpg" />
+    <Content Include="Content\ReportsButton.jpg" />
+    <Content Include="Content\Repos.jpg" />
+    <Content Include="Content\RolesButton.jpg" />
+    <Content Include="Content\sadfish.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -265,6 +273,10 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\TwoButtonRoles.jpg" />
+    <Content Include="Content\UserReports.jpg" />
+    <Content Include="Content\VolunteerForEvent.jpg" />
+    <Content Include="Content\VolunteerToEvent.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -597,6 +609,8 @@
     <Content Include="Views\Help\AdminRoles.cshtml" />
     <Content Include="Views\Help\AdminDelete.cshtml" />
     <Content Include="Views\Help\AdminReports.cshtml" />
+    <Content Include="Views\Event\errorEvent.cshtml" />
+    <Content Include="Views\Reports\EventList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,11 +45,18 @@ namespace GreatLakesAlliance.Controllers
                 tempVol.eventId = item.EventId;
                 tempVol.fullName = item.FullName;
 
-                string eName = db.EventDataModels.Where(a => a.eventId == item.EventId).Select(a => a.eventName).First();
-                tempVol.eventName = eName;
+                try
+                {
+                    string eName = db.EventDataModels.Where(a => a.eventId == item.EventId).Select(a => a.eventName).First();
+                    tempVol.eventName = eName;
                 
-                //adds temp volunteer to full list of volunteers
-                realList.Add(tempVol);
+                    //adds temp volunteer to full list of volunteers
+                    realList.Add(tempVol);
+                } catch (Exception e)
+                {
+
+                }
+                
             }
 
             //reorders the list to sort by event volunteered at
@@ -74,16 +81,23 @@ namespace GreatLakesAlliance.Controllers
                 tempDonor.fullName = item.fullName;
                 tempDonor.userId = item.userId;
 
-                //checks if the donation was made to the GLA or not
-                string eName = "Great Lakes Alliance";
-                if (!(item.eventId == 0))
+                try
                 {
-                    eName = db.EventDataModels.Where(a => a.eventId == item.eventId).Select(a => a.eventName).First(); tempDonor.eventName = eName;
+                    //checks if the donation was made to the GLA or not
+                    string eName = "Great Lakes Alliance";
+                    if (!(item.eventId == 0))
+                    {
+                        eName = db.EventDataModels.Where(a => a.eventId == item.eventId).Select(a => a.eventName).First(); tempDonor.eventName = eName;
+                    }
+
+                    tempDonor.eventName = eName;
+
+                    realDonors.Add(tempDonor);
+                } catch (Exception e)
+                {
+
                 }
-
-                tempDonor.eventName = eName;
-
-                realDonors.Add(tempDonor);
+                
             }
 
             realDonors = realDonors.OrderBy(a => a.eventName).ToList();
@@ -129,11 +143,16 @@ namespace GreatLakesAlliance.Controllers
             {
                 ShortVolunteer temp = new ShortVolunteer();
 
-                string eName = db.EventDataModels.Where(a => a.eventId == item.EventId).Select(a => a.eventName).First();
-                temp.eventName = eName;
+                try
+                {
+                    string eName = db.EventDataModels.Where(a => a.eventId == item.EventId).Select(a => a.eventName).First();
+                    temp.eventName = eName;
+                    allVol.Add(temp);
+                }
+                catch (Exception e)
+                {
 
-                allVol.Add(temp);
-
+                }
             }
 
             //adding items to the 'allDonations' list
@@ -172,6 +191,11 @@ namespace GreatLakesAlliance.Controllers
             db.SaveChanges();
 
             return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult EventList()
+        {
+            return View(db.EventDataModels.OrderBy(a => a.eventStartDate));
         }
     }
 }

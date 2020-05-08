@@ -1,0 +1,82 @@
+﻿@model IEnumerable<GreatLakesAlliance.Models.EventDataModel>
+
+@{
+    ViewBag.Title = "EventList";
+}
+
+<h2 style="margin-top:75px">List of All Events</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Event Name
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Start Time
+        </th>
+        <th>
+            End Time
+        </th>
+        <th>
+            Volunteers Needed
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.eventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.eventStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.eventEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.volunteersNeeded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @if (DateTime.Compare(Convert.ToDateTime(item.eventStartDate), DateTime.Now) > 0)
+                {
+                    <a>@Html.ActionLink("Delete", "Delete", new { id = item.eventId })</a>
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<div class="form-group" style="margin-bottom: 8%">
+    <div class=" = col-md-2">
+        <input type="button" title="Delete" class="btn btn-default" value="Back To Reports" onclick="location.href='@Url.Action("", "Reports")'" />
+    </div>
+</div>
