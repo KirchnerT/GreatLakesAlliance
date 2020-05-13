@@ -13,8 +13,11 @@
     [UserName]             NVARCHAR (256) NOT NULL,
     [FullName]             NVARCHAR (100) DEFAULT ('') NOT NULL,
     [Gender]               BIT            DEFAULT ((0)) NULL,
+    [Deleted]              BIT            DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO

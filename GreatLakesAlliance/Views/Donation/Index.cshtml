@@ -6,9 +6,11 @@
 
 <h2 style="margin-top: 75px">Previous Donations</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { eventId = 0 }) 
-</p>
+<div style="margin-bottom: 15px">
+    <div>
+        <input style="width: 100px" type="submit" value="Donate" class="btn btn-default" style="width: 150px" onclick="location.href='@Url.Action("Create", "Donation", new { eventId = 0 })'" />
+    </div>
+</div>
 
 <div class="label-warning col-md-7" style="margin-bottom: 10px">
     *NOTE: IF ANY INFORMATION BELOW IS INCORRECT. PLEASE CONTACT SUPPORT*

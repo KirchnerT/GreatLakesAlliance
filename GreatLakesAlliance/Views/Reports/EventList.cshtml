@@ -66,7 +66,7 @@
             <td>
                 @if (DateTime.Compare(Convert.ToDateTime(item.eventStartDate), DateTime.Now) > 0)
                 {
-                    <a>@Html.ActionLink("Delete", "Delete", new { id = item.eventId })</a>
+                    <a>@Html.ActionLink("Delete", "Delete", "Event", new { id = item.eventId }, null)</a>
                 }
             </td>
 
